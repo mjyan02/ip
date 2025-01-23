@@ -16,7 +16,7 @@ public class Duke {
             String inputLowerCase = input.toLowerCase();
 
             if (inputLowerCase.equals("bye")) {
-                System.out.println("Bye. Please come back soon!");
+                System.out.println("Bye! Hope you come back soon!!");
                 break;
             } else {
                 System.out.println(input);
