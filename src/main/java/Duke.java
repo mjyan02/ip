@@ -10,6 +10,8 @@ public class Duke {
         System.out.println("Hello! I'm \n" + logo + "\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int taskCount = 0;
 
         while (true) {
             String input = sc.nextLine();
@@ -18,8 +20,14 @@ public class Duke {
             if (inputLowerCase.equals("bye")) {
                 System.out.println("Bye! Hope you come back soon!!");
                 break;
+            } else if (inputLowerCase.equals("list")) {
+                for (int i = 0; i < taskCount; i++) {
+                    System.out.println((i + 1) + ". " + tasks[i]);
+                }
             } else {
-                System.out.println(input);
+                tasks[taskCount] = input;
+                taskCount++;
+                System.out.println("added: " + input);
             }
         }
 
