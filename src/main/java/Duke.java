@@ -11,31 +11,31 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + logo + "\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = new ArrayList<>(); // Array to store tasks
+        ArrayList<Task> tasks = Storage.loadTasks(); // Array to store tasks loaded from hard disk
 
         while (true) {
             try {
                 String input = sc.nextLine();
                 String[] inputArr = input.split(" ", 2); // Split arguments for marking and unmarking
-                String inputLowerCase = inputArr[0].toLowerCase();
+                Keywords keyword = Keywords.fromString(inputArr[0]);
 
-                switch (inputLowerCase) {
-                    case "bye":
+                switch (keyword) {
+                    case BYE:
                         System.out.println("Bye! Hope you come back soon!!");
                         sc.close();
                         return;
 
-                    case "list":
+                    case LIST:
                         listTasks(tasks);
                         break;
 
-                    case "mark":
+                    case MARK:
 
-                    case "unmark":
-                        modifyTask(tasks, inputArr, inputLowerCase.equals("mark"));
+                    case UNMARK:
+                        modifyTask(tasks, inputArr, keyword.equals(Keywords.MARK));
                         break;
 
-                    case "todo":
+                    case TODO:
                         if (inputArr.length < 2) {
                             throw new DukeException("Please include a description of the task in the format: todo <description>!");
                         } else {
@@ -45,7 +45,7 @@ public class Duke {
 
                         break;
 
-                    case "deadline": {
+                    case DEADLINE: {
                         String[] details = inputArr[1].split(" /by ", 2); // Split arguments to get details
 
                         if (details.length < 2) {
@@ -58,7 +58,7 @@ public class Duke {
                         break;
                     }
 
-                    case "event": {
+                    case EVENT: {
                         String[] details = inputArr[1].split(" /from ", 2); // Split arguments to get details
 
                         if (details.length < 2 || !details[1].contains(" /to ")) {
@@ -72,7 +72,7 @@ public class Duke {
                         break;
                     }
 
-                    case "delete":
+                    case DELETE:
                         deleteTask(tasks, inputArr);
                         break;
 
@@ -90,6 +90,7 @@ public class Duke {
         System.out.println("Got it. I've added this task:");
         System.out.println("  " + task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        Storage.saveTasks(tasks);
     }
 
     // Method for listing tasks
@@ -119,6 +120,7 @@ public class Duke {
                 System.out.println("OK, I've marked this task as not done yet:");
             }
             System.out.println("  " + task);
+            Storage.saveTasks(tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         } catch (Exception e) {
@@ -139,6 +141,7 @@ public class Duke {
             System.out.println("Noted. I've removed this task:");
             System.out.println("  " + removedTask);
             System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            Storage.saveTasks(tasks);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         } catch (Exception e) {
