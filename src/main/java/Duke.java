@@ -34,8 +34,43 @@ public class Duke {
                     modifyTask(tasks, inputArr, inputLowerCase.equals("mark"), taskCount);
                     break;
 
+                case "todo":
+                    if (inputArr.length < 2) {
+                        System.out.println("Please enter a description of the task!");
+                    } else {
+                        tasks[taskCount] = new Todo(inputArr[1]);
+                        addTask(tasks[taskCount], ++taskCount);
+                    }
+
+                    break;
+
+                case "deadline": {
+                    String[] details = inputArr[1].split(" /by ", 2); // Split arguments to get details
+
+                    if (details.length < 2) {
+                        System.out.println("Please enter a description and due date for the task!");
+                    } else {
+                        tasks[taskCount] = new Deadline(details[0], details[1]);
+                        addTask(tasks[taskCount], ++taskCount);
+                    }
+                    break;
+                }
+
+                case "event": {
+                    String[] details = inputArr[1].split(" /from ", 2); // Split arguments to get details
+
+                    if (details.length < 2 || !details[1].contains(" /to ")) {
+                        System.out.println("Please enter a description and duration for the task!");
+                    } else {
+                        String[] timeDetails = details[1].split(" /to ", 2);
+                        tasks[taskCount] = new Event(details[0], timeDetails[0], timeDetails[1]);
+                        addTask(tasks[taskCount], ++taskCount);
+                    }
+                    break;
+                }
+
                 default:
-                    addTask(tasks, input, taskCount++);
+                    System.out.println("I'm sorry, I don't know what that means :(");
             }
         }
     }
@@ -71,8 +106,9 @@ public class Duke {
     }
 
     // Method for adding new tasks
-    private static void addTask(Task[] tasks, String input, int taskCount) {
-        tasks[taskCount] = new Task(input);
-        System.out.println("added: " + input);
+    private static void addTask(Task task, int taskCount) {
+        System.out.println("Got it. I've added this task:");
+        System.out.println("  " + task);
+        System.out.println("Now you have " + taskCount + " tasks in the list.");
     }
 }
