@@ -1,3 +1,5 @@
+package Duke.Task;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -34,7 +36,7 @@ public abstract class Task {
 
         String type = str[0];   // To identify the task type (T, D, E)
         boolean isDone = str[1].equals("1");
-        String description = str[2];  // Task description
+        String description = str[2];  // Keywords.Task description
 
         return switch (type) {
             case "T" -> new Todo(description, isDone);

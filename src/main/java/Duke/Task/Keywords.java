@@ -1,3 +1,5 @@
+package Duke.Task;
+
 public enum Keywords {
     BYE,
     LIST,

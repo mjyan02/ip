@@ -1,3 +1,9 @@
+package Duke;
+
+import Duke.Task.*;
+import Duke.Exceptions.DukeException;
+import Duke.Ui.Ui;
+
 public class Duke {
     private final Storage storage;
     private TaskList tasks;
