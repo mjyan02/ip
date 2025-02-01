@@ -20,7 +20,7 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Task> loadTasks() {
+    public static ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(PATH_URL);
 
