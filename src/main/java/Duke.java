@@ -1,151 +1,93 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-
 public class Duke {
-    public static void main(String[] args) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke\n" + logo + "\nWhat can I do for you?");
+    private final Storage storage;
+    private TaskList tasks;
+    private final Ui ui;
 
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = Storage.getTasks(); // Array to store tasks loaded from hard disk
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList(storage.getTasks());
+    }
 
-        while (true) {
+    public void run() {
+        ui.welcomeMessage();
+        boolean isExit = false;
+
+        while (!isExit) {
             try {
-                String input = sc.nextLine();
-                String[] inputArr = input.split(" ", 2); // Split arguments for marking and unmarking
-                Keywords keyword = Keywords.fromString(inputArr[0]);
+                String fullKeyword = ui.readKeyword();
+                ui.showLine();
+                Keywords keyword = Parser.parseKeyword(fullKeyword);
 
                 switch (keyword) {
                     case BYE:
-                        System.out.println("Bye! Hope you come back soon!!");
-                        sc.close();
-                        return;
+                        ui.displayMessage("Bye! Hope you come back soon!!");
+                        isExit = true;
+                        break;
 
                     case LIST:
-                        listTasks(tasks);
+                        tasks.listTasks(ui);
                         break;
 
                     case MARK:
 
                     case UNMARK:
-                        modifyTask(tasks, inputArr, keyword.equals(Keywords.MARK));
+                        String[] markArgs = fullKeyword.split(" ", 2);
+                        tasks.modifyTask(Integer.parseInt(markArgs[1]) - 1, keyword.equals(Keywords.MARK), ui, storage);
                         break;
 
                     case TODO:
-                        if (inputArr.length < 2) {
-                            throw new DukeException("Please include a description of the task in the format: todo <description>!");
-                        } else {
-                            tasks.add(new Todo(inputArr[1]));
-                            addTask(tasks.get(tasks.size() - 1), tasks);
+                        String[] todoArgs = fullKeyword.split(" ", 2);
+
+                        if (todoArgs.length < 2) {
+                            throw new DukeException("Please include a description!");
                         }
 
+                        tasks.addTask(new Todo(todoArgs[1]), ui, storage);
                         break;
 
-                    case DEADLINE: {
-                        String[] details = inputArr[1].split(" /by ", 2); // Split arguments to get details
+                    case DEADLINE:
+                        String[] deadlineArgs = fullKeyword.split(" /by ", 2);
 
-                        if (details.length < 2) {
-                            throw new DukeException("Please include a description and due date for the task in the format: deadline <description> /by yyyy-MM-dd!");
-                        } else {
-                            tasks.add(new Deadline(details[0], details[1]));
-                            addTask(tasks.get(tasks.size() - 1), tasks);
+                        if (deadlineArgs.length < 2) {
+                            throw new DukeException("Format: deadline <description> /by yyyy-MM-dd");
                         }
 
+                        tasks.addTask(new Deadline(deadlineArgs[0], deadlineArgs[1]), ui, storage);
                         break;
-                    }
 
-                    case EVENT: {
-                        String[] details = inputArr[1].split(" /from ", 2); // Split arguments to get details
+                    case EVENT:
+                        String[] eventArgs = fullKeyword.split(" /from ", 2);
 
-                        if (details.length < 2 || !details[1].contains(" /to ")) {
-                            throw new DukeException("Please include a description and duration for the task in the format: event <description> /from yyyy-MM-dd /to yyyy-MM-dd!");
-                        } else {
-                            String[] duration = details[1].split(" /to ", 2);
-                            tasks.add(new Event(details[0], duration[0], duration[1]));
-                            addTask(tasks.get(tasks.size() - 1), tasks);
+                        if (eventArgs.length < 2 || !eventArgs[1].contains(" /to ")) {
+                            throw new DukeException("Format: event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
                         }
 
+                        String[] eventTimes = eventArgs[1].split(" /to ", 2);
+                        tasks.addTask(new Event(eventArgs[0], eventTimes[0], eventTimes[1]), ui, storage);
                         break;
-                    }
 
                     case DELETE:
-                        deleteTask(tasks, inputArr);
+                        String[] deleteArgs = fullKeyword.split(" ", 2);
+                        tasks.deleteTask(Integer.parseInt(deleteArgs[1]) - 1, ui, storage);
                         break;
 
-                    default:
-                        throw new DukeException("I'm sorry, I don't know what that means :(");
+                    case UNKNOWN:
+                        throw new DukeException("I'm sorry, but I don't recognize that command :(");
                 }
+            } catch (NumberFormatException e) {
+                ui.displayError("Please enter a number!");
+            } catch (IndexOutOfBoundsException e) {
+                ui.displayError("Please enter a valid task number!");
             } catch (Exception e) {
-                throw new DukeException(e.getMessage());
+                ui.displayError(e.getMessage());
+            } finally {
+                ui.showLine();
             }
         }
     }
 
-    // Method for adding new tasks
-    private static void addTask(Task task, ArrayList<Task> tasks) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        Storage.saveTasks(tasks);
-    }
-
-    // Method for listing tasks
-    private static void listTasks(ArrayList<Task> tasks) {
-        System.out.println(tasks.isEmpty() ? "There are no tasks in your list." : "Here are the tasks in your list:");
-
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i));
-        }
-    }
-
-    // Method for marking or unmarking tasks
-    private static void modifyTask(ArrayList<Task> tasks, String[] inputArr, boolean isMarked) throws DukeException {
-        if (inputArr.length < 2) {
-            throw new DukeException("Please specify a valid task number!");
-        }
-
-        try {
-            int taskNumber = Integer.parseInt(inputArr[1]) - 1;
-            Task task = tasks.get(taskNumber);
-
-            if (isMarked) {
-                task.markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-            } else {
-                task.markAsNotDone();
-                System.out.println("OK, I've marked this task as not done yet:");
-            }
-            System.out.println("  " + task);
-            Storage.saveTasks(tasks);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Invalid task number!");
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
-        }
-    }
-
-    // Method for deleting tasks
-    private static void deleteTask(ArrayList<Task> tasks, String[] inputArr) throws DukeException {
-        if (inputArr.length < 2) {
-            throw new DukeException("You must specify a task number to delete.");
-        }
-
-        try {
-            int taskNumber = Integer.parseInt(inputArr[1]) - 1;
-            Task removedTask = tasks.remove(taskNumber);
-
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + removedTask);
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            Storage.saveTasks(tasks);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Invalid task number!");
-        } catch (Exception e) {
-            throw new DukeException(e.getMessage());
-        }
+    public static void main(String[] args) {
+        new Duke("C:/Users/ymj53/OneDrive/Documents/Uni/Y2S2/CS2103T/data/duke.txt").run();
     }
 }

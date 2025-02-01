@@ -2,7 +2,11 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Storage {
-    private static final String PATH_URL = "C:/Users/ymj53/OneDrive/Documents/Uni/Y2S2/CS2103T/data/duke.txt";
+    protected static String PATH_URL;
+
+    public Storage(String filePath) {
+        PATH_URL = filePath;
+    }
 
     public static void saveTasks(ArrayList<Task> tasks) {
         try {
