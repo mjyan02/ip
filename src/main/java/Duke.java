@@ -11,7 +11,7 @@ public class Duke {
         System.out.println("Hello! I'm Duke\n" + logo + "\nWhat can I do for you?");
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> tasks = Storage.loadTasks(); // Array to store tasks loaded from hard disk
+        ArrayList<Task> tasks = Storage.getTasks(); // Array to store tasks loaded from hard disk
 
         while (true) {
             try {
@@ -49,7 +49,7 @@ public class Duke {
                         String[] details = inputArr[1].split(" /by ", 2); // Split arguments to get details
 
                         if (details.length < 2) {
-                            throw new DukeException("Please include a description and due date for the task in the format: deadline <description> /by <due date>!");
+                            throw new DukeException("Please include a description and due date for the task in the format: deadline <description> /by yyyy-MM-dd!");
                         } else {
                             tasks.add(new Deadline(details[0], details[1]));
                             addTask(tasks.get(tasks.size() - 1), tasks);
@@ -62,7 +62,7 @@ public class Duke {
                         String[] details = inputArr[1].split(" /from ", 2); // Split arguments to get details
 
                         if (details.length < 2 || !details[1].contains(" /to ")) {
-                            throw new DukeException("Please include a description and duration for the task in the format: event <description> /from <start> /to <end>!");
+                            throw new DukeException("Please include a description and duration for the task in the format: event <description> /from yyyy-MM-dd /to yyyy-MM-dd!");
                         } else {
                             String[] duration = details[1].split(" /to ", 2);
                             tasks.add(new Event(details[0], duration[0], duration[1]));
