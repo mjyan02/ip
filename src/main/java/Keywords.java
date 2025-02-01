@@ -6,9 +6,14 @@ public enum Keywords {
     TODO,
     DEADLINE,
     EVENT,
-    DELETE;
+    DELETE,
+    UNKNOWN;
 
-    public static Keywords fromString(String commandStr) {
-        return Keywords.valueOf(commandStr.toUpperCase());
+    public static Keywords fromString(String kw) {
+        try {
+            return Keywords.valueOf(kw.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            return UNKNOWN; // Return UNKNOWN for incorrect keywords
+        }
     }
 }
