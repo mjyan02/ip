@@ -6,13 +6,29 @@ import Duke.Task.Task;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Handles getting and saving tasks to a local file on the hard disk.
+ */
 public class Storage {
+    /**
+     * The file path where tasks are stored on the hard disk.
+     */
     protected static String PATH_URL;
 
+    /**
+     * Initializes the Storage with the specified file path.
+     *
+     * @param filePath The file path where tasks will be stored locally.
+     */
     public Storage(String filePath) {
         PATH_URL = filePath;
     }
 
+    /**
+     * Saves the current list of tasks to the storage file.
+     *
+     * @param tasks The list of tasks to be saved.
+     */
     public static void saveTasks(ArrayList<Task> tasks) {
         try {
             File file = new File(PATH_URL);
@@ -29,6 +45,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets tasks from the storage file.
+     *
+     * @return An ArrayList containing the tasks from the storage file.
+     */
     public static ArrayList<Task> getTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(PATH_URL);
