@@ -1,5 +1,7 @@
 package Duke.Task;
 
+import Duke.Exceptions.DukeException;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
@@ -28,7 +30,7 @@ public abstract class Task {
 
     public abstract String toFile();
 
-    public static Task fromFile(String line) {
+    public static Task fromFile(String line) throws DukeException {
         String[] str = line.split(" \\| ");
         if (str.length < 3) {
             return null; // Corrupt file
@@ -50,6 +52,10 @@ public abstract class Task {
             }
             default -> null; // Invalid type
         };
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override

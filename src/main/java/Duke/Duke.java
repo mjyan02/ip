@@ -44,11 +44,6 @@ public class Duke {
 
                     case TODO:
                         String[] todoArgs = fullKeyword.split(" ", 2);
-
-                        if (todoArgs.length < 2) {
-                            throw new DukeException("Please include a description!");
-                        }
-
                         tasks.addTask(new Todo(todoArgs[1]), ui, storage);
                         break;
 
@@ -81,9 +76,7 @@ public class Duke {
                     case UNKNOWN:
                         throw new DukeException("I'm sorry, but I don't recognize that command :(");
                 }
-            } catch (NumberFormatException e) {
-                ui.displayError("Please enter a number!");
-            } catch (IndexOutOfBoundsException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 ui.displayError("Please enter a valid task number!");
             } catch (Exception e) {
                 ui.displayError(e.getMessage());

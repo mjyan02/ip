@@ -1,5 +1,6 @@
 package Duke;
 
+import Duke.Exceptions.DukeException;
 import Duke.Task.Task;
 
 import java.io.*;
@@ -56,7 +57,7 @@ public class Storage {
             }
 
             reader.close();
-        } catch (IOException e) {
+        } catch (IOException | DukeException e) {
             System.out.println("Error getting tasks!");
         }
 

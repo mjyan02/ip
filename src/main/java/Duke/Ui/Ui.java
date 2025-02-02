@@ -15,7 +15,7 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke.Duke\n" + logo + "\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke :D\n" + logo + "\nWhat can I do for you?");
     }
 
     public String readKeyword() {
