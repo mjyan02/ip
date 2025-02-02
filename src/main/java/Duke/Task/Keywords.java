@@ -9,6 +9,7 @@ public enum Keywords {
     DEADLINE,
     EVENT,
     DELETE,
+    FIND,
     UNKNOWN;
 
     public static Keywords fromString(String kw) {
