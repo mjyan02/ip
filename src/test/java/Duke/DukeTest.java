@@ -2,12 +2,12 @@ package Duke;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 import Duke.Ui.Ui;
 import Duke.Task.*;
 import Duke.Exceptions.DukeException;
+
 import java.util.ArrayList;
 
 public class DukeTest {
@@ -62,5 +62,28 @@ public class DukeTest {
 
         taskList.deleteTask(0, ui, storage);
         assertEquals(0, taskList.getSize());
+    }
+
+    @Test
+    public void testFindExistingTask() throws DukeException {
+        taskList.addTask(new Todo("read book"), ui, storage);
+        taskList.addTask(new Deadline("return book", "2024-06-06"), ui, storage);
+        taskList.addTask(new Event("project meeting", "2024-02-20", "2024-02-21"), ui, storage);
+
+        ArrayList<Task> matchedTasks = taskList.findTasks("book", ui); // This should match "read book" and "return book"
+
+        assertEquals(2, matchedTasks.size());
+        assertEquals("[T][ ] read book", matchedTasks.get(0).toString());
+        assertEquals("[D][ ] return book (by: Jun 06 2024)", matchedTasks.get(1).toString());
+    }
+
+    @Test
+    public void testFindNonExistentTask() throws DukeException {
+        taskList.addTask(new Todo("read book"), ui, storage);
+        taskList.addTask(new Deadline("return book", "2024-06-06"), ui, storage);
+
+        ArrayList<Task> matchedTasks = taskList.findTasks("homework", ui);
+
+        assertEquals(0, matchedTasks.size());
     }
 }
