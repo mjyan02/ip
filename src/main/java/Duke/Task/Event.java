@@ -1,22 +1,34 @@
 package Duke.Task;
 
+import Duke.Exceptions.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     protected LocalDate from;
     protected LocalDate to;
 
-    public Event(String description, String from, String to) {
+    public Event(String description, String from, String to) throws DukeException {
         super(description);
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+
+        try {
+            this.from = LocalDate.parse(from);
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format! Please use yyyy-MM-dd!");
+        }
     }
 
-    public Event(String description, String from, String to, boolean isDone) {
+    public Event(String description, String from, String to, boolean isDone) throws DukeException {
         super(description, isDone);
-        this.from = LocalDate.parse(from);
-        this.to = LocalDate.parse(to);
+
+        try {
+            this.from = LocalDate.parse(from);
+            this.to = LocalDate.parse(to);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid date format! Please use yyyy-MM-dd!");
+        }
     }
 
     @Override
