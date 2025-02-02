@@ -1,21 +1,39 @@
 package Duke;
 
 import Duke.Exceptions.DukeException;
-import Duke.Task.Deadline;
 import Duke.Ui.Ui;
 import Duke.Task.Task;
-import Duke.Task.Todo;
 
 import java.util.ArrayList;
 
+/**
+ * Manages all the different types of tasks.
+ * Provides methods to add, delete, modify, and list tasks.
+ * Provides methods used for validating arguments and for testing purposes.
+ */
 public class TaskList {
+    /**
+     * ArrayList to store an existing list of tasks.
+     */
     private final ArrayList<Task> tasks;
 
+    /**
+     * Creates a TaskList instance with an existing list of tasks.
+     *
+     * @param tasks The list of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    // Method to add new tasks
+    /**
+     * Adds a new task to the task list.
+     *
+     * @param task The task to be added.
+     * @param ui The UI instance to display messages.
+     * @param storage The storage instance to save the task.
+     * @throws DukeException If any errors occur while adding the task.
+     */
     public void addTask(Task task, Ui ui, Storage storage) throws DukeException {
         if (task != null) {
             String description = task.getDescription().trim();
@@ -35,7 +53,11 @@ public class TaskList {
         storage.saveTasks(tasks);
     }
 
-    // Method to list tasks
+    /**
+     * Displays all the tasks in the task list.
+     *
+     * @param ui The UI instance to display messages.
+     */
     public void listTasks(Ui ui) {
         if (tasks.isEmpty()) {
             ui.displayMessage("There are no tasks in your list.");
@@ -47,7 +69,15 @@ public class TaskList {
         }
     }
 
-    // Method to mark or unmark tasks
+    /**
+     * Marks or unmarks a task as done.
+     *
+     * @param tN The task number to modify.
+     * @param isMarked True if marked as done, false if unmarked.
+     * @param ui The UI instance to display messages.
+     * @param storage The storage instance to save changes.
+     * @throws DukeException If the task number provided is invalid.
+     */
     public void modifyTask(Integer tN, boolean isMarked, Ui ui, Storage storage) throws DukeException {
         int taskNumber = validateArguments(tN);
         Task task = tasks.get(taskNumber);
@@ -62,7 +92,14 @@ public class TaskList {
         storage.saveTasks(tasks);
     }
 
-    // Method for deleting tasks
+    /**
+     * Deletes a task from the task list.
+     *
+     * @param tN The task number to delete.
+     * @param ui The UI instance to display messages.
+     * @param storage The storage instance to save changes.
+     * @throws DukeException If the task number provided is invalid.
+     */
     public void deleteTask(Integer tN, Ui ui, Storage storage) throws DukeException {
         int taskNumber = validateArguments(tN);
         Task removedTask = tasks.remove(taskNumber);
@@ -71,7 +108,13 @@ public class TaskList {
         storage.saveTasks(tasks);
     }
 
-    // Method to check for correct arguments
+    /**
+     * Validates the task number provided by the user.
+     *
+     * @param tN The task number to validate.
+     * @return The validated task index.
+     * @throws DukeException If the task number provided is invalid or out of bounds.
+     */
     private int validateArguments(Integer tN) throws DukeException {
         int taskNumber = tN;
 
@@ -82,12 +125,22 @@ public class TaskList {
         return taskNumber;
     }
 
-    // For testing purposes
+    /**
+     * Returns the number of tasks in the task list for testing purposes.
+     *
+     * @return The number of tasks in the list.
+     */
     public int getSize() {
         return tasks.size();
     }
 
-    // For testing purposes
+    /**
+     * Retrieves a task from the task list at the specified index for testing purposes.
+     *
+     * @param index The index of the task to retrieve.
+     * @return The task at the specified index.
+     * @throws DukeException If the index provided is out of bounds.
+     */
     public Task getTask(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Invalid task number! Please enter a valid number.");
