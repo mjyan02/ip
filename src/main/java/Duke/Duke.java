@@ -78,7 +78,7 @@ public class Duke {
                 }
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 ui.displayError("Please enter a valid task number!");
-            } catch (Exception e) {
+            } catch (DukeException e) {
                 ui.displayError(e.getMessage());
             } finally {
                 ui.showLine();
