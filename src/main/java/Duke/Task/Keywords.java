@@ -43,6 +43,11 @@ public enum Keywords {
      * Keyword for deleting a task.
      */
     DELETE,
+  
+    /**
+     * Keyword for finding a task.
+     */
+    FIND,
 
     /**
      * Represents an unknown keyword.

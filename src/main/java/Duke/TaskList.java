@@ -109,6 +109,36 @@ public class TaskList {
     }
 
     /**
+     * Finds and displays tasks that contain the specified keyword in their description.
+     *
+     * @param keyword The keyword to search for in task descriptions.
+     * @param ui The UI instance to display results.
+     * @throws DukeException If no keyword is provided.
+     */
+    public void findTasks(String keyword, Ui ui) throws DukeException {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            throw new DukeException("Please enter a keyword to search for!");
+        }
+
+        ArrayList<Task> findTask = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (task.getDescription().toUpperCase().contains(keyword.toUpperCase())) {
+                findTask.add(task);
+            }
+        }
+
+        if (findTask.isEmpty()) {
+            ui.displayMessage("I'm sorry, no matching tasks were found :(");
+        } else {
+            ui.displayMessage("Here are the matching tasks in your list:");
+
+            for (int i = 0; i < findTask.size(); i++) {
+                ui.displayMessage((i + 1) + ". " + findTask.get(i));
+            }
+        }
+    }
+
      * Validates the task number provided by the user.
      *
      * @param tN The task number to validate.
