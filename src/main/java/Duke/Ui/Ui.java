@@ -27,7 +27,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello! I'm Duke :D\n" + logo + "\nWhat can I do for you?");
+        System.out.println("Hello! I'm Duke :D\n" + logo + "\nI can assist you in creating a todo list for your tasks!");
+        System.out.println("\nWhat can I do for you?");
     }
 
     /**
