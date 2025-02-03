@@ -95,7 +95,9 @@ public class Duke {
                     case UNKNOWN:
                         throw new DukeException("I'm sorry, but I don't recognize that command :(");
                 }
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            } catch (NumberFormatException e) {
+                ui.displayError("Please enter a number!");
+            } catch (IndexOutOfBoundsException e) {
                 ui.displayError("Please enter a valid task number!");
             } catch (DukeException e) {
                 ui.displayError(e.getMessage());
