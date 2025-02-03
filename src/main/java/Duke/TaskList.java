@@ -130,7 +130,7 @@ public class TaskList {
         }
 
         if (matchedTasks.isEmpty()) {
-            ui.displayMessage("I'm sorry, no matching tasks were found :(");
+            ui.displayMessage("I'm sorry, no tasks named '" + keyword + "' were found :(");
         } else {
             ui.displayMessage("Here are the matching tasks in your list:");
 
