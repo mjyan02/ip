@@ -26,7 +26,8 @@ public class DeadlineTest {
     public void testValidDeadlineCreation() throws DukeException {
         Deadline deadline = new Deadline("Submit report", "2024-12-10");
         taskList.addTask(deadline, ui, storage);
-        assertEquals("[D][ ] Submit report (by: Dec 10 2024)", taskList.getTask(0).toString());
+        assertEquals("Here are the tasks in your list:\n" +
+                "1. [D][ ] Submit report (by: Dec 10 2024)", taskList.listTasks(ui));
     }
 
     @Test

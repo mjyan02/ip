@@ -26,7 +26,8 @@ public class TodoTest {
     public void testValidTodoCreation() throws DukeException {
         Todo todo = new Todo("Read book");
         taskList.addTask(todo, ui, storage);
-        assertEquals("[T][ ] Read book", taskList.getTask(0).toString());
+        assertEquals("Here are the tasks in your list:\n" +
+                "1. [T][ ] Read book", taskList.listTasks(ui));
     }
 
     @Test

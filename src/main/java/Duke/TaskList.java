@@ -54,19 +54,27 @@ public class TaskList {
     }
 
     /**
-     * Displays all the tasks in the task list.
+     * Displays all tasks in the task list
      *
      * @param ui The UI instance to display messages.
+     * @return A string representation of all tasks in the task list.
      */
-    public void listTasks(Ui ui) {
+    public String listTasks(Ui ui) {
+        StringBuilder result = new StringBuilder();
+
         if (tasks.isEmpty()) {
-            ui.displayMessage("There are no tasks in your list.");
+            result.append("There are no tasks in your list.");
         } else {
-            ui.displayMessage("Here are the tasks in your list:");
+            result.append("Here are the tasks in your list:\n");
+
             for (int i = 0; i < tasks.size(); i++) {
-                ui.displayMessage((i + 1) + ". " + tasks.get(i));
+                result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
             }
         }
+
+        String outString = result.toString().trim();
+        ui.displayMessage(outString);
+        return outString;
     }
 
     /**

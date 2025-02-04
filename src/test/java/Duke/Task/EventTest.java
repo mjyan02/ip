@@ -26,7 +26,8 @@ public class EventTest {
     public void testValidEventCreation() throws DukeException {
         Event event = new Event("Project meeting", "2024-02-20", "2024-02-21");
         taskList.addTask(event, ui, storage);
-        assertEquals("[E][ ] Project meeting (from: Feb 20 2024 to: Feb 21 2024)", taskList.getTask(0).toString());
+        assertEquals("Here are the tasks in your list:\n" +
+                "1. [E][ ] Project meeting (from: Feb 20 2024 to: Feb 21 2024)", taskList.listTasks(ui));
     }
 
     @Test
