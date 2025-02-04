@@ -25,7 +25,7 @@ public class Duke {
     }
 
     /**
-     * Runs Duke and processes user input.
+     * Runs Duke and processes user inputs.
      */
     public void run() {
         ui.welcomeMessage();
