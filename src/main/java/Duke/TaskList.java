@@ -175,19 +175,4 @@ public class TaskList {
     public int getSize() {
         return tasks.size();
     }
-
-    /**
-     * Retrieves a task from the task list at the specified index for testing purposes.
-     *
-     * @param index The index of the task to retrieve.
-     * @return The task at the specified index.
-     * @throws DukeException If the index provided is out of bounds.
-     */
-    public Task getTask(int index) throws DukeException {
-        if (index < 0 || index >= tasks.size()) {
-            throw new DukeException("Invalid task number! Please enter a valid number.");
-        }
-
-        return tasks.get(index);
-    }
 }
