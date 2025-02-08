@@ -1,8 +1,8 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.DukeException;
-import Duke.Ui.Ui;
-import Duke.Task.Task;
+import duke.exceptions.DukeException;
+import duke.ui.Ui;
+import duke.task.Task;
 
 import java.util.ArrayList;
 

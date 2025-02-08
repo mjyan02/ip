@@ -1,4 +1,4 @@
-package Duke.Exceptions;
+package duke.exceptions;
 
 /**
  * Class for throwing exceptions specific to the Duke chatbot application.

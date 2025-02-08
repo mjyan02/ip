@@ -1,6 +1,6 @@
-package Duke;
+package duke;
 
-import Duke.Task.Keywords;
+import duke.task.Keywords;
 
 /**
  * Parses user input commands and returns the corresponding keyword.

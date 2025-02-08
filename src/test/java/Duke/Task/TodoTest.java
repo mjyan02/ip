@@ -1,13 +1,15 @@
-package Duke.Task;
+package duke.task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import Duke.Ui.Ui;
-import Duke.*;
-import Duke.Exceptions.DukeException;
+import duke.Storage;
+import duke.TaskList;
+import duke.ui.Ui;
+import duke.exceptions.DukeException;
+
 import java.util.ArrayList;
 
 public class TodoTest {

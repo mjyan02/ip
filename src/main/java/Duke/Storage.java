@@ -1,9 +1,12 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.DukeException;
-import Duke.Task.Task;
+import duke.exceptions.DukeException;
+import duke.task.Task;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**

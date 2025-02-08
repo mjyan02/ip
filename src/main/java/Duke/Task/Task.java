@@ -1,6 +1,6 @@
-package Duke.Task;
+package duke.task;
 
-import Duke.Exceptions.DukeException;
+import duke.exceptions.DukeException;
 
 /**
  * Represents a generic task in Duke with a description and marked status.

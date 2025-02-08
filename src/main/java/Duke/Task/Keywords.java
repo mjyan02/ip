@@ -1,4 +1,4 @@
-package Duke.Task;
+package duke.task;
 
 /**
  * Enum representing different keywords for Duke.

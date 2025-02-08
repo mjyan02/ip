@@ -1,4 +1,4 @@
-package Duke.Ui;
+package duke.ui;
 
 public class UiTest {
 }

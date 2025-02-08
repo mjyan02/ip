@@ -1,12 +1,12 @@
-package Duke;
+package duke;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import Duke.Ui.Ui;
-import Duke.Task.*;
-import Duke.Exceptions.DukeException;
+import duke.ui.Ui;
+import duke.task.*;
+import duke.exceptions.DukeException;
 
 import java.util.ArrayList;
 

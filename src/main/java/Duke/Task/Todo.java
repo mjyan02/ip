@@ -1,4 +1,4 @@
-package Duke.Task;
+package duke.task;
 
 /**
  * Represents a Todo task that contains a task description.
