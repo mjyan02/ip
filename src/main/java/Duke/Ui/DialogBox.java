@@ -2,6 +2,7 @@ package duke.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -9,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 
 /**
  * A customised DialogBox using JavaFX for displaying chat messages in Duke.
@@ -21,18 +21,16 @@ public class DialogBox extends HBox {
         ImageView displayPicture = new ImageView(img);
 
         text.setWrapText(true);
-        text.setStyle("-fx-background-color: #40444b; -fx-text-fill: white; -fx-padding: 10px; -fx-background-radius: 10px;");
+        text.setPadding(new Insets(8));
+        text.setStyle("-fx-background-color: #40444b; -fx-text-fill: white; -fx-background-radius: 10px;");
         text.setMinHeight(Region.USE_PREF_SIZE);
 
         displayPicture.setFitWidth(50);
         displayPicture.setFitHeight(50);
-        displayPicture.setStyle("-fx-border-radius: 50%;");
 
-        StackPane messageContainer = new StackPane(text);
-        messageContainer.setStyle("-fx-background-color: #40444b; -fx-padding: 5px; -fx-background-radius: 10px;");
-
+        this.setSpacing(10);
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(messageContainer, displayPicture);
+        this.getChildren().addAll(text, displayPicture);
     }
 
     private void flip() {
