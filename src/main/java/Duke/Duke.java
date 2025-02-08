@@ -91,8 +91,6 @@ public class Duke {
             ui.displayError("Please enter a valid task number!");
         } catch (DukeException e) {
             ui.displayError(e.getMessage());
-        } finally {
-            ui.showLine();
         }
     }
 }

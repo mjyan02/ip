@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 /**
- * A custom JavaFX control for displaying chat messages.
+ * A customised DialogBox using JavaFX for displaying chat messages in Duke.
  */
 public class DialogBox extends HBox {
 

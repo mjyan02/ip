@@ -5,7 +5,7 @@ package duke.task;
  */
 public enum Keywords {
     /**
-     * Keyword for exiting the application.
+     * Keyword for exiting Duke.
      */
     BYE,
 
@@ -25,7 +25,7 @@ public enum Keywords {
     UNMARK,
 
     /**
-     * Keyword for adding a new ToDo task.
+     * Keyword for adding a new Todo task.
      */
     TODO,
 

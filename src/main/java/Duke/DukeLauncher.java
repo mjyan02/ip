@@ -5,7 +5,7 @@ import duke.ui.DukeGui;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * Launcher for Duke GUI.
  */
 public class DukeLauncher {
     public static void main(String[] args) {

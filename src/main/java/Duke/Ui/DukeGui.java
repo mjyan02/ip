@@ -17,21 +17,21 @@ import java.io.PrintStream;
 import java.util.Objects;
 
 /**
- * Duke GUI interface for Duke using JavaFX.
+ * Duke GUI interface using JavaFX.
  */
 public class DukeGui extends Application {
 
     private ScrollPane scrollPane;
     private VBox vB;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private final Duke duke = new Duke("C:/Users/ymj53/OneDrive/Documents/Uni/Y2S2/CS2103T/data/dukegui.txt");
 
-    private Image userImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/User.jpg")));
-    private Image dukeImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Duke.jpg")));
+    private final Image userImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/User.jpg")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Duke.jpg")));
 
-
+    /**
+     * Setup function for the GUI
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -42,11 +42,11 @@ public class DukeGui extends Application {
 
         userInput = new TextField();
         userInput.setPromptText("Message Duke...");
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        scene = new Scene(mainLayout, 500, 700);
+        Scene scene = new Scene(mainLayout, 500, 700);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader()
                 .getResource("styles/styles.css")).toExternalForm());
 
