@@ -17,7 +17,7 @@ import java.io.PrintStream;
 import java.util.Objects;
 
 /**
- * Duke GUI interface using JavaFX.
+ * GUI interface using JavaFX for Duke.
  */
 public class DukeGui extends Application {
 
