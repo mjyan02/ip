@@ -19,7 +19,7 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome message when chatbot application starts.
+     * Displays the welcome message when Duke starts.
      */
     public void welcomeMessage() {
         String logo = " ____        _        \n"
@@ -30,22 +30,6 @@ public class Ui {
         System.out.println("Hello! I'm Duke :D\n" + logo + "\nI can create todos, deadlines or events for you!");
         System.out.println("Use my keywords to mark, list, delete and find your tasks!");
         System.out.println("\nWhat can I do for you?");
-    }
-
-    /**
-     * Reads a keyword input from the user.
-     *
-     * @return The user input as a string.
-     */
-    public String readKeyword() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Displays a horizontal line to segment different prompts.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -64,12 +48,5 @@ public class Ui {
      */
     public void displayError(String message) {
         System.out.println("Error: " + message);
-    }
-
-    /**
-     * Closes the scanner to prevent resource leaks.
-     */
-    public void close() {
-        sc.close();
     }
 }

@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Class for throwing exceptions specific to the Duke chatbot application.
+ * Class for throwing exceptions specific to the Duke.
  */
 public class DukeException extends Exception {
     /**
