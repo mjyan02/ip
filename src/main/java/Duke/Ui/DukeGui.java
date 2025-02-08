@@ -46,7 +46,7 @@ public class DukeGui extends Application {
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        Scene scene = new Scene(mainLayout, 500, 700);
+        Scene scene = new Scene(mainLayout, 510, 700);
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader()
                 .getResource("styles/styles.css")).toExternalForm());
 
@@ -62,11 +62,11 @@ public class DukeGui extends Application {
 
         String welcomeText = printResponse("help");
         vB.getChildren().add(DialogBox.getDukeDialog(welcomeText, dukeImage));
-        vB.setPrefSize(490, 500);
+        vB.setPrefSize(485, 500);
         AnchorPane.setTopAnchor(scrollPane, 0.0);
         AnchorPane.setBottomAnchor(scrollPane, 50.0);
 
-        scrollPane.setPrefSize(505, 620);
+        scrollPane.setPrefSize(510, 620);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
