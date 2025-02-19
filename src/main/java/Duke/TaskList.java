@@ -35,15 +35,19 @@ public class TaskList {
      * @throws DukeException If any errors occur while adding the task.
      */
     public void addTask(Task task, Ui ui, Storage storage) throws DukeException {
-        if (task != null) {
-            String description = task.getDescription().trim();
+        String description = task.getDescription().trim();
 
-            if (description.isEmpty()) {
-                throw new DukeException("Please include a description!");
-            }
+        if (description.isEmpty()) {
+            throw new DukeException("Please include a description!");
+        }
 
-            if (description.matches("\\d+")) {
-                throw new DukeException("Description cannot be only numbers!");
+        if (description.matches("\\d+")) {
+            throw new DukeException("Description cannot be only numbers!");
+        }
+
+        for (Task t : tasks) {
+            if (t.getDescription().equalsIgnoreCase(description)) {
+                throw new DukeException("Duplicate task detected! This task already exists!");
             }
         }
 
