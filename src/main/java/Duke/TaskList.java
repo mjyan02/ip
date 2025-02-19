@@ -52,7 +52,7 @@ public class TaskList {
         }
 
         tasks.add(task);
-        ui.displayMessage("Got it. I've added this task:\n  " + task);
+        ui.displayMessage("Got it. I've added this task:\n" + task);
         ui.displayMessage("Now you have " + tasks.size() + " tasks in the list.");
         storage.saveTasks(tasks);
     }
@@ -96,10 +96,10 @@ public class TaskList {
 
         if (isMarked) {
             task.markAsDone();
-            ui.displayMessage("Nice! I've marked this task as done:\n  " + task);
+            ui.displayMessage("Nice! I've marked this task as done:\n" + task);
         } else {
             task.markAsNotDone();
-            ui.displayMessage("OK, I've marked this task as not done yet:\n  " + task);
+            ui.displayMessage("OK, I've marked this task as not done yet:\n " + task);
         }
         storage.saveTasks(tasks);
     }
@@ -115,7 +115,7 @@ public class TaskList {
     public void deleteTask(Integer tN, Ui ui, Storage storage) throws DukeException {
         int taskNumber = validateArguments(tN);
         Task removedTask = tasks.remove(taskNumber);
-        ui.displayMessage("Noted. I've removed this task:\n  " + removedTask);
+        ui.displayMessage("Noted. I've removed this task:\n" + removedTask);
         ui.displayMessage("Now you have " + tasks.size() + " tasks in the list.");
         storage.saveTasks(tasks);
     }

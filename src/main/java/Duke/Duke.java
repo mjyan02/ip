@@ -61,17 +61,16 @@ public class Duke {
                     break;
 
                 case TODO:
-                    String[] todoArgs = input.split(" ", 2);
-
-                    if (todoArgs.length < 2) {
+                    String todoDescription = Parser.extractDescription(input);
+                    if (todoDescription.isEmpty()) {
                         throw new DukeException("Please include a valid task description!");
                     }
-
-                    tasks.addTask(new Todo(todoArgs[1]), ui, storage);
+                    tasks.addTask(new Todo(todoDescription), ui, storage);
                     break;
 
                 case DEADLINE:
-                    String[] deadlineArgs = input.split(" /by ", 2);
+                    String deadlineDescription = Parser.extractDescription(input);
+                    String[] deadlineArgs = deadlineDescription.split(" /by ", 2);
                     if (deadlineArgs.length < 2) {
                         throw new DukeException("Please follow the input format: " +
                                 "deadline <description> /by yyyy-MM-dd");
@@ -80,7 +79,8 @@ public class Duke {
                     break;
 
                 case EVENT:
-                    String[] eventArgs = input.split(" /from ", 2);
+                    String eventDescription = Parser.extractDescription(input);
+                    String[] eventArgs = eventDescription.split(" /from ", 2);
                     if (eventArgs.length < 2 || !eventArgs[1].contains(" /to ")) {
                         throw new DukeException("Please follow the input format: " +
                                 "event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
