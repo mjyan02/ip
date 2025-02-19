@@ -21,7 +21,8 @@ public class Duke {
      *
      * @param filePath The file path where tasks are stored on the hard disk.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
+        assert filePath != null && !filePath.isEmpty() : "File path cannot be null or empty";
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.getTasks());
@@ -33,6 +34,8 @@ public class Duke {
      * @param input The user input command.
      */
     public void run(String input) {
+        assert input != null : "User input should not be null";
+
         try {
             if (input.equalsIgnoreCase("help")) {
                 ui.welcomeMessage();
@@ -40,21 +43,38 @@ public class Duke {
             }
 
             Keywords keyword = Parser.parseKeyword(input);
+            assert keyword != null : "Keyword cannot be null";
 
             switch (keyword) {
                 case LIST:
                     tasks.listTasks(ui);
                     break;
 
+                case MARK:
+                    String[] markedArgs = input.split(" ", 2);
+                    tasks.modifyTask(Integer.parseInt(markedArgs[1]) - 1, true, ui, storage);
+                    break;
+
+                case UNMARK:
+                    String[] unmarkedArgs = input.split(" ", 2);
+                    tasks.modifyTask(Integer.parseInt(unmarkedArgs[1]) - 1, false, ui, storage);
+                    break;
+
                 case TODO:
                     String[] todoArgs = input.split(" ", 2);
+
+                    if (todoArgs.length < 2) {
+                        throw new DukeException("Please include a valid task description!");
+                    }
+
                     tasks.addTask(new Todo(todoArgs[1]), ui, storage);
                     break;
 
                 case DEADLINE:
                     String[] deadlineArgs = input.split(" /by ", 2);
                     if (deadlineArgs.length < 2) {
-                        throw new DukeException("Please follow the input format: deadline <description> /by yyyy-MM-dd");
+                        throw new DukeException("Please follow the input format: " +
+                                "deadline <description> /by yyyy-MM-dd");
                     }
                     tasks.addTask(new Deadline(deadlineArgs[0], deadlineArgs[1]), ui, storage);
                     break;
@@ -62,7 +82,8 @@ public class Duke {
                 case EVENT:
                     String[] eventArgs = input.split(" /from ", 2);
                     if (eventArgs.length < 2 || !eventArgs[1].contains(" /to ")) {
-                        throw new DukeException("Please follow the input format: event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
+                        throw new DukeException("Please follow the input format: " +
+                                "event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
                     }
                     String[] eventTimes = eventArgs[1].split(" /to ", 2);
                     tasks.addTask(new Event(eventArgs[0], eventTimes[0], eventTimes[1]), ui, storage);

@@ -2,6 +2,7 @@ package duke.ui;
 
 import duke.Duke;
 
+import duke.exceptions.DukeException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,6 +29,9 @@ public class DukeGui extends Application {
 
     private final Image userImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/User.jpg")));
     private final Image dukeImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Duke.jpg")));
+
+    public DukeGui() throws DukeException {
+    }
 
     /**
      * Setup function for the GUI
