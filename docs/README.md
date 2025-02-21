@@ -56,6 +56,7 @@ All you need to do is:
 6. Finding Tasks: `find`
    - Find tasks in task list by specifying description after keyword
    - Example: `find CS2103T`
+
 ---
 
 > [**NOTE**]  
