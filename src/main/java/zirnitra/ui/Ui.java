@@ -30,7 +30,7 @@ public class Ui {
                           /______/__|__|     |__|   |__|__| \\___|__|    \\__, __|
                 """;
 
-        System.out.println("Greetings, I am Zirnitra, your personal assistant! 🐉\n" + logo);
+        System.out.println("Greetings, I am Zirnitra, your personal assistant!\n" + logo);
         System.out.println("I can manage your tasks such as Todos, Deadlines, or Events.");
         System.out.println("Use my commands to mark, list, delete, and find your tasks.");
         System.out.println("\nWhat can I do for you?");
