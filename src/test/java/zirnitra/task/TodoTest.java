@@ -10,6 +10,7 @@ import zirnitra.TaskList;
 import zirnitra.ui.Ui;
 import zirnitra.exceptions.ZirnitraException;
 
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class TodoTest {
@@ -20,7 +21,7 @@ public class TodoTest {
     @BeforeEach
     public void run() {
         ui = new Ui();
-        storage = new Storage("C:/Users/ymj53/OneDrive/Documents/Uni/Y2S2/CS2103T/data/duke.txt");
+        storage = new Storage(Paths.get(System.getProperty("user.dir"), "TaskTest").toString());
         taskList = new TaskList(new ArrayList<>());
     }
 

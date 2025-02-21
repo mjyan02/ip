@@ -2,7 +2,6 @@ package zirnitra.ui;
 
 import zirnitra.Zirnitra;
 
-import zirnitra.exceptions.ZirnitraException;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Objects;
+import java.nio.file.Paths;
 
 /**
  * GUI interface using JavaFX for Zirnitra.
@@ -25,12 +25,14 @@ public class ZirnitraGui extends Application {
     private ScrollPane scrollPane;
     private VBox vB;
     private TextField userInput;
-    private final Zirnitra zirnitra = new Zirnitra("C:/Users/ymj53/OneDrive/Documents/Uni/Y2S2/CS2103T/data/dukegui.txt");
+    private final Zirnitra zirnitra = new Zirnitra(Paths.get(System.getProperty("user.dir"), "TaskList")
+            .toString());
+    private final Image userImage = new Image(Objects.requireNonNull(getClass()
+            .getResourceAsStream("/images/User.jpg")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(getClass()
+            .getResourceAsStream("/images/Zirnitra.jpg")));
 
-    private final Image userImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/User.jpg")));
-    private final Image dukeImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Zirnitra.jpg")));
-
-    public ZirnitraGui() throws ZirnitraException {
+    public ZirnitraGui() {
     }
 
     /**

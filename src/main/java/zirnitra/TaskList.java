@@ -165,7 +165,8 @@ public class TaskList {
         int taskNumber = tN;
 
         if (taskNumber < 0 || taskNumber >= tasks.size()) {
-            throw new ZirnitraException("Task does not exist! Please enter a number between 1 and " + tasks.size() + ".");
+            throw new ZirnitraException("Task does not exist! " +
+                    "Please enter a number between 1 and " + tasks.size() + ".");
         }
 
         return taskNumber;
