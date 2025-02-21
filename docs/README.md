@@ -15,7 +15,7 @@ All you need to do is:
 2. download the latest `.jar` from [here](https://github.com/mjyan02/ip.git).
 3. open cmd, `cd` into the folder you put the jar file in and use the `java -jar zirnitra.jar` command to run the application
 
-> [!NOTE]
+> [**NOTE**]  
 > Zirnitra has been configured to create TaskList file in current working directory to store tasks. 
 
 5. add your tasks.
@@ -30,7 +30,7 @@ All you need to do is:
 
 **Commands:**
 
-> [!NOTE]
+> [**NOTE**]  
 > Command keywords and task description are coded to be non-case sensitive!
 
 1. Viewing Help: `help`
@@ -58,7 +58,7 @@ All you need to do is:
    - Example: `find CS2103T`
 ---
 
-> [!NOTE] 
+> [**NOTE**]  
 > If you are a Java programmer, you can use it to practice Java too. Here's the `main` method:
 
 ```
