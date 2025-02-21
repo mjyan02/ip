@@ -1,51 +1,85 @@
 package zirnitra.ui;
 
+import java.io.IOException;
+import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 
 /**
- * A customised DialogBox using JavaFX for displaying chat messages in Zirnitra.
+ * A custom dialog box used in the Zirnitra GUI.
+ * It contains an ImageView to represent Zirnitra
+ * and a Label containing the user's text.
  */
 public class DialogBox extends HBox {
+    private static final String FXML_PATH = "/view/DialogBox.fxml";
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
 
-    public DialogBox(String message, Image img) {
-        Label text = new Label(message);
-        ImageView displayPicture = new ImageView(img);
+    /**
+     * Creates a DialogBox instance.
+     *
+     * @param text The message text.
+     * @param img  The image of the speaker.
+     */
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(ZirnitraGui.class.getResource(FXML_PATH));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        text.setPadding(new Insets(8));
-        text.setStyle("-fx-background-color: #40444b; -fx-text-fill: white; -fx-background-radius: 10px;");
-        text.setMinHeight(Region.USE_PREF_SIZE);
+        assert dialog != null : "dialog cannot be null after loading FXML!";
+        assert displayPicture != null : "displayPicture cannot be null after loading FXML!";
 
-        displayPicture.setFitWidth(50);
-        displayPicture.setFitHeight(50);
-
-        this.setSpacing(10);
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setWrapText(true);
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
+    /**
+     * Flips the dialog box so that the image is on the left.
+     * This is used for Zirnitra's responses.
+     */
     private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        Collections.reverse(tmp);
+        getChildren().setAll(tmp);
+        setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String message, Image img) {
-        return new DialogBox(message, img);
+    /**
+     * Returns a dialog box for the user.
+     *
+     * @param text The message text.
+     * @param img  The user's image.
+     * @return A user dialog box.
+     */
+    public static DialogBox getUserDialog(String text, Image img) {
+        return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String message, Image img) {
-        var db = new DialogBox(message, img);
+    /**
+     * Returns a dialog box for Zirnitra.
+     *
+     * @param text The message text.
+     * @param img  Zirnitra's image.
+     * @return A Zirnitra dialog box.
+     */
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
         return db;
     }

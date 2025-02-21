@@ -3,6 +3,8 @@ package zirnitra.ui;
 import zirnitra.Zirnitra;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -13,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Objects;
 import java.nio.file.Paths;
@@ -21,11 +24,15 @@ import java.nio.file.Paths;
  * GUI interface using JavaFX for Zirnitra.
  */
 public class ZirnitraGui extends Application {
-
+    @FXML
+    public Button sendButton;
+    @FXML
     private ScrollPane scrollPane;
+    @FXML
     private VBox vB;
+    @FXML
     private TextField userInput;
-    private final Zirnitra zirnitra = new Zirnitra(Paths.get(System.getProperty("user.dir"), "TaskList")
+    private Zirnitra zirnitra = new Zirnitra(Paths.get(System.getProperty("user.dir"), "TaskList")
             .toString());
     private final Image userImage = new Image(Objects.requireNonNull(getClass()
             .getResourceAsStream("/images/User.jpg")));
@@ -36,58 +43,38 @@ public class ZirnitraGui extends Application {
     }
 
     /**
-     * Setup function for the GUI
+     * Welcome Message for Zirnitra.
+     */
+    public void welcomeMessage() {
+        String welcomeText = printResponse("help");
+        vB.getChildren().add(DialogBox.getDukeDialog(welcomeText, dukeImage));
+    }
+
+    /**
+     * Setup function for GUI.
      */
     @Override
     public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        vB = new VBox();
-        scrollPane.setContent(vB);
-        scrollPane.setStyle("-fx-background: #D0E8FF; -fx-border-color: transparent;");
-        vB.setStyle("-fx-background-color: #D0E8FF;");
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
 
-        userInput = new TextField();
-        userInput.setPromptText("Message Zirnitra...");
-        Button sendButton = new Button("Send");
+            stage.setTitle("zirnitra");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
 
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        Scene scene = new Scene(mainLayout, 510, 700);
-        scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader()
-                .getResource("styles/styles.css")).toExternalForm());
+            fxmlLoader.<ZirnitraGui>getController().setZirnitra(zirnitra);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        stage.setTitle("zirnitra");
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setMinHeight(750.0);
-        stage.setMinWidth(520.0);
-        stage.setMaxHeight(750.0);
-        stage.setMaxWidth(520.0);
-
-        String welcomeText = printResponse("help");
-        vB.getChildren().add(DialogBox.getDukeDialog(welcomeText, dukeImage));
-        vB.setPrefSize(485, 500);
-        AnchorPane.setTopAnchor(scrollPane, 0.0);
-        AnchorPane.setBottomAnchor(scrollPane, 50.0);
-
-        scrollPane.setPrefSize(510, 620);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-        userInput.setPrefWidth(380);
-        userInput.setStyle("-fx-background-color: #A5C7E6; -fx-text-fill: black;");
-        sendButton.setPrefWidth(80);
-        sendButton.setStyle("-fx-background-color: #2C7A7B; -fx-text-fill: white;");
-
-        AnchorPane.setBottomAnchor(userInput, 13.0);
-        AnchorPane.setLeftAnchor(userInput, 15.0);
-        AnchorPane.setBottomAnchor(sendButton, 13.0);
-        AnchorPane.setRightAnchor(sendButton, 15.0);
-
+    private void setZirnitra(Zirnitra z) {
+        this.zirnitra = z;
+        welcomeMessage();
         vB.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
         sendButton.setOnAction(event -> handleInput());
         userInput.setOnAction(event -> handleInput());
     }
@@ -95,6 +82,7 @@ public class ZirnitraGui extends Application {
     /**
      * Handles user inputs and redirects it to Zirnitra GUI.
      */
+    @FXML
     private void handleInput() {
         String userText = userInput.getText();
         String dukeText = printResponse(userText);

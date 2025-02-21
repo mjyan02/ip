@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root type="HBox" xmlns="http://javafx.com/javafx/17"
+         xmlns:fx="http://javafx.com/fxml/1"
+         alignment="TOP_RIGHT"
+         spacing="5">
+        <Label fx:id="dialog" wrapText="true" minHeight="-Infinity"
+               style="-fx-background-color: #40444b; -fx-text-fill: white; -fx-background-radius: 6px;
+                      -fx-padding: 3px; -fx-label-padding: 6px;"/>
+        <ImageView fx:id="displayPicture" fitWidth="50" fitHeight="50"/>
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="5"/>
+    </padding>
+</fx:root>
