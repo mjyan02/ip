@@ -47,7 +47,7 @@ public class ZirnitraGui extends Application {
         vB.setStyle("-fx-background-color: #D0E8FF;");
 
         userInput = new TextField();
-        userInput.setPromptText("Message Duke...");
+        userInput.setPromptText("Message Zirnitra...");
         Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
