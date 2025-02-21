@@ -1,6 +1,4 @@
-package zirnitra;
-
-import zirnitra.ui.ZirnitraGui;
+package zirnitra.main;
 
 import javafx.application.Application;
 
@@ -9,6 +7,6 @@ import javafx.application.Application;
  */
 public class ZirnitraLauncher {
     public static void main(String[] args) {
-        Application.launch(ZirnitraGui.class, args);
+        Application.launch(Main.class, args);
     }
 }

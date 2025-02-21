@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="zirnitra.ui.ZirnitraGui"
+            fx:controller="zirnitra.ui.MainWindow"
             prefWidth="510.0" prefHeight="670.0"
             style="-fx-background-color: #2C2F33;">
 

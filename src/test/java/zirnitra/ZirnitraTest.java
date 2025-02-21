@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import zirnitra.main.Storage;
+import zirnitra.main.TaskList;
 import zirnitra.ui.Ui;
 import zirnitra.task.*;
 import zirnitra.exceptions.ZirnitraException;

@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import zirnitra.Storage;
-import zirnitra.TaskList;
+import zirnitra.main.Storage;
+import zirnitra.main.TaskList;
 import zirnitra.ui.Ui;
 import zirnitra.exceptions.ZirnitraException;
 

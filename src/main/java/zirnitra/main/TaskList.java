@@ -1,4 +1,4 @@
-package zirnitra;
+package zirnitra.main;
 
 import zirnitra.exceptions.ZirnitraException;
 import zirnitra.ui.Ui;

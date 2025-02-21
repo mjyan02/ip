@@ -43,11 +43,11 @@ test {
 }
 
 application {
-    mainClass.set("zirnitra.ZirnitraLauncher")
+    mainClass.set("zirnitra.main.ZirnitraLauncher")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveFileName = "zirnitra.jar"
     archiveClassifier = null
 }
 

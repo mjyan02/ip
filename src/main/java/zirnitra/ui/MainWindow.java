@@ -1,29 +1,23 @@
 package zirnitra.ui;
 
-import zirnitra.Zirnitra;
+import javafx.scene.layout.AnchorPane;
+import zirnitra.main.Zirnitra;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Objects;
-import java.nio.file.Paths;
 
 /**
  * GUI interface using JavaFX for Zirnitra.
  */
-public class ZirnitraGui extends Application {
+public class MainWindow extends AnchorPane {
     @FXML
     public Button sendButton;
     @FXML
@@ -32,14 +26,13 @@ public class ZirnitraGui extends Application {
     private VBox vB;
     @FXML
     private TextField userInput;
-    private Zirnitra zirnitra = new Zirnitra(Paths.get(System.getProperty("user.dir"), "TaskList")
-            .toString());
+    private Zirnitra zirnitra;
     private final Image userImage = new Image(Objects.requireNonNull(getClass()
             .getResourceAsStream("/images/User.jpg")));
     private final Image dukeImage = new Image(Objects.requireNonNull(getClass()
             .getResourceAsStream("/images/Zirnitra.jpg")));
 
-    public ZirnitraGui() {
+    public MainWindow() {
     }
 
     /**
@@ -51,30 +44,18 @@ public class ZirnitraGui extends Application {
     }
 
     /**
-     * Setup function for GUI.
+     * Initializes ZirnitraGui and ensures scroll pane automatically scrolls
+     * down to the bottom when new messages are added.
      */
-    @Override
-    public void start(Stage stage) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-
-            stage.setTitle("zirnitra");
-            stage.setResizable(false);
-            stage.setScene(scene);
-            stage.show();
-
-            fxmlLoader.<ZirnitraGui>getController().setZirnitra(zirnitra);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void initialize() {
+        vB.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    private void setZirnitra(Zirnitra z) {
+    public void setZirnitra(Zirnitra z) {
         this.zirnitra = z;
         welcomeMessage();
-        vB.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
         sendButton.setOnAction(event -> handleInput());
         userInput.setOnAction(event -> handleInput());
     }
