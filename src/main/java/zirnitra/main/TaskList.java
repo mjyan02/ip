@@ -164,6 +164,10 @@ public class TaskList {
     private int validateArguments(Integer tN) throws ZirnitraException {
         int taskNumber = tN;
 
+        if (tasks.isEmpty()) {
+            throw new ZirnitraException("You have no tasks!");
+        }
+
         if (taskNumber < 0 || taskNumber >= tasks.size()) {
             throw new ZirnitraException("Task does not exist! " +
                     "Please enter a number between 1 and " + tasks.size() + ".");

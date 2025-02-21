@@ -46,65 +46,65 @@ public class Zirnitra {
             assert keyword != null : "Keyword cannot be null";
 
             switch (keyword) {
-                case LIST:
-                    tasks.listTasks(ui);
-                    break;
+            case LIST:
+                tasks.listTasks(ui);
+                break;
 
-                case MARK:
-                    String[] markedArgs = input.split(" ", 2);
-                    tasks.modifyTask(Integer.parseInt(markedArgs[1]) - 1, true, ui, storage);
-                    break;
+            case MARK:
+                String[] markedArgs = input.split(" ", 2);
+                tasks.modifyTask(Integer.parseInt(markedArgs[1]) - 1, true, ui, storage);
+                break;
 
-                case UNMARK:
-                    String[] unmarkedArgs = input.split(" ", 2);
-                    tasks.modifyTask(Integer.parseInt(unmarkedArgs[1]) - 1, false, ui, storage);
-                    break;
+            case UNMARK:
+                String[] unmarkedArgs = input.split(" ", 2);
+                tasks.modifyTask(Integer.parseInt(unmarkedArgs[1]) - 1, false, ui, storage);
+                break;
 
-                case TODO:
-                    String todoDescription = Parser.extractDescription(input);
-                    if (todoDescription.isEmpty()) {
-                        throw new ZirnitraException("Please include a valid task description!");
-                    }
-                    tasks.addTask(new Todo(todoDescription), ui, storage);
-                    break;
+            case TODO:
+                String todoDescription = Parser.extractDescription(input);
+                if (todoDescription.isEmpty()) {
+                    throw new ZirnitraException("Please include a valid task description!");
+                }
+                tasks.addTask(new Todo(todoDescription), ui, storage);
+                break;
 
-                case DEADLINE:
-                    String deadlineDescription = Parser.extractDescription(input);
-                    String[] deadlineArgs = deadlineDescription.split(" /by ", 2);
-                    if (deadlineArgs.length < 2) {
-                        throw new ZirnitraException("Please follow the input format: " +
-                                "deadline <description> /by yyyy-MM-dd");
-                    }
-                    tasks.addTask(new Deadline(deadlineArgs[0], deadlineArgs[1]), ui, storage);
-                    break;
+            case DEADLINE:
+                String deadlineDescription = Parser.extractDescription(input);
+                String[] deadlineArgs = deadlineDescription.split(" /by ", 2);
+                if (deadlineArgs.length < 2) {
+                    throw new ZirnitraException("Please follow the input format: " +
+                            "deadline <description> /by yyyy-MM-dd");
+                }
+                tasks.addTask(new Deadline(deadlineArgs[0], deadlineArgs[1]), ui, storage);
+                break;
 
-                case EVENT:
-                    String eventDescription = Parser.extractDescription(input);
-                    String[] eventArgs = eventDescription.split(" /from ", 2);
-                    if (eventArgs.length < 2 || !eventArgs[1].contains(" /to ")) {
-                        throw new ZirnitraException("Please follow the input format: " +
-                                "event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
-                    }
-                    String[] eventTimes = eventArgs[1].split(" /to ", 2);
-                    tasks.addTask(new Event(eventArgs[0], eventTimes[0], eventTimes[1]), ui, storage);
-                    break;
+            case EVENT:
+                String eventDescription = Parser.extractDescription(input);
+                String[] eventArgs = eventDescription.split(" /from ", 2);
+                if (eventArgs.length < 2 || !eventArgs[1].contains(" /to ")) {
+                    throw new ZirnitraException("Please follow the input format: " +
+                            "event <description> /from yyyy-MM-dd /to yyyy-MM-dd");
+                }
+                String[] eventTimes = eventArgs[1].split(" /to ", 2);
+                tasks.addTask(new Event(eventArgs[0], eventTimes[0], eventTimes[1]), ui, storage);
+                break;
 
-                case DELETE:
-                    String[] deleteArgs = input.split(" ", 2);
-                    tasks.deleteTask(Integer.parseInt(deleteArgs[1]) - 1, ui, storage);
-                    break;
+            case DELETE:
+                String[] deleteArgs = input.split(" ", 2);
+                tasks.deleteTask(Integer.parseInt(deleteArgs[1]) - 1, ui, storage);
+                break;
 
-                case FIND:
-                    String[] findArgs = input.split(" ", 2);
-                    tasks.findTasks(findArgs.length > 1 ? findArgs[1] : "", ui);
-                    break;
+            case FIND:
+                String[] findArgs = input.split(" ", 2);
+                tasks.findTasks(findArgs.length > 1 ? findArgs[1] : "", ui);
+                break;
 
-                case BYE:
-                    ui.displayMessage("Bye! Hope you come back soon!!");
-                    break;
+            case BYE:
+                ui.displayMessage("Bye! Hope you come back soon!!");
+                break;
 
-                default:
-                    throw new ZirnitraException("I'm sorry, but I don't recognize that command :(");
+            default:
+                throw new ZirnitraException("I'm sorry, but I don't recognize that command :(");
             }
         } catch (NumberFormatException e) {
             ui.displayError("Please enter a number!");

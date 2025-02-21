@@ -1,11 +1,11 @@
 package zirnitra.exceptions;
 
 /**
- * Class for throwing exceptions specific to the Duke.
+ * Class for throwing exceptions specific to Zirnitra.
  */
 public class ZirnitraException extends Exception {
     /**
-     * Throws a new DukeException with the specified error message.
+     * Throws a new ZirnitraException with the specified error message.
      *
      * @param message The error message describing the exception.
      */

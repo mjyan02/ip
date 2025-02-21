@@ -18,6 +18,9 @@ import java.util.Objects;
  * GUI interface using JavaFX for Zirnitra.
  */
 public class MainWindow extends AnchorPane {
+    /**
+     * Send button in Zirnitra.
+     */
     @FXML
     public Button sendButton;
     @FXML
@@ -32,6 +35,9 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(Objects.requireNonNull(getClass()
             .getResourceAsStream("/images/Zirnitra.jpg")));
 
+    /**
+     * Default constructor for MainWindow.
+     */
     public MainWindow() {
     }
 
@@ -52,6 +58,13 @@ public class MainWindow extends AnchorPane {
         vB.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Sets Zirnitra instance.
+     * Displays welcomeMessage for Zirnitra
+     * Ensures pressing ENTER key leads to handling user inputs
+     *
+     * @param z Zirnitra instance to be set.
+     */
     public void setZirnitra(Zirnitra z) {
         this.zirnitra = z;
         welcomeMessage();

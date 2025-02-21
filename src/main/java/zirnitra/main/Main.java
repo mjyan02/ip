@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 /**
  * A GUI for Zirnitra using FXML.
  * This class sets us the Gui using JavaFX.
+ * This class is used in Zirnitra Launcher to launch the GUI.
  */
 public class Main extends Application {
     private static final String FXML_PATH = "/view/MainWindow.fxml";
@@ -30,17 +31,16 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class
                     .getResource(FXML_PATH));
+
             AnchorPane anchor = fxmlLoader.load();
             Scene scene = new Scene(anchor);
-
             stage.setScene(scene);
             stage.setTitle("Zirnitra Chatbot");
-
             MainWindow zGui = fxmlLoader.getController();
             zGui.setZirnitra(zirnitra);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
 
