@@ -14,8 +14,12 @@ All you need to do is:
 1. ensure you have `17` or above installed
 2. download the latest `.jar` from [here](https://github.com/mjyan02/ip.git).
 3. open cmd, `cd` into the folder you put the jar file in and use the `java -jar zirnitra.jar` command to run the application
-4. add your tasks.
-4. let it manage your tasks for you 😉
+
+> [!NOTE]
+> Zirnitra has been configured to create TaskList file in current working directory to store tasks. 
+
+5. add your tasks.
+5. let it manage your tasks for you 😉
 
 **Features:**
 
