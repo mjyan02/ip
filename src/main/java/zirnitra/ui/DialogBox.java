@@ -51,8 +51,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box so that the image is on the left.
-     * This is used for Zirnitra's responses.
+     * Flip the dialog box so that the image is on the left side.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());

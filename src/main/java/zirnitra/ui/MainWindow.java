@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 public class MainWindow extends AnchorPane {
     /**
-     * Send button in Zirnitra.
+     * Send button in ZirnitraGUI.
      */
     @FXML
     public Button sendButton;

@@ -24,7 +24,7 @@ public class Main extends Application {
      * Displays main window of the Zirnitra Chatbot.
      * Loads the FXML file for the mainWindow, sets up the scene, and shows the stage.
      *
-     * @param stage The stage for Zirnitra.
+     * @param stage The stage for ZirnitraGUI.
      */
     @Override
     public void start(Stage stage) {
