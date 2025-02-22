@@ -40,7 +40,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
 
         assert dialog != null : "dialog cannot be null after loading FXML!";
