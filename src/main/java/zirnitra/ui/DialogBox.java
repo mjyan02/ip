@@ -16,8 +16,7 @@ import java.util.Collections;
 
 /**
  * A custom dialog box used in the Zirnitra GUI.
- * It contains an ImageView to represent Zirnitra
- * and a Label containing the user's text.
+ * It contains an ImageView to represent Zirnitra and a Label containing the user's text.
  */
 public class DialogBox extends HBox {
     private static final String FXML_PATH = "/view/DialogBox.fxml";
