@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 
 /**
  * A GUI for Zirnitra using FXML.
- * This class sets us the Gui using JavaFX.
+ * This class sets up the Gui using JavaFX.
  * This class is used in Zirnitra Launcher to launch the GUI.
  */
 public class Main extends Application {
